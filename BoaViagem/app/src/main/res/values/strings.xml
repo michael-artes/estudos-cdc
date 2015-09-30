@@ -11,8 +11,18 @@
     <string name="erro_autenticao">Usuário informado está incorreto!</string>
 
     <string name="dash_novo_gasto">Novo Gasto</string>
-    <string name="dash_nova_viagem">Minhas Viagens</string>
+    <string name="dash_nova_viagem">Nova Viagem</string>
     <string name="dash_minhas_viagens">Minhas Viagens</string>
     <string name="dash_config">Configurações</string>
+    <string name="destino">Destino</string>
+    <string name="tipo_da_viagem">Tipo da Viagem</string>
+    <string name="lazer">Lazer</string>
+    <string name="negocios">Negócios</string>
+    <string name="data_da_chegada">Data de Chegada</string>
+    <string name="data_da_saida">Data de Saída</string>
+    <string name="selecione">Selecione</string>
+    <string name="orcamento">Orçamento</string>
+    <string name="quantidade_de_pessoas">Quantidade de Pessoas</string>
+    <string name="salvar">Salvar</string>
 
 </resources>
