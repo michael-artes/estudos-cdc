@@ -3,4 +3,16 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="login_user">Usuario</string>
+    <string name="login_senha">Senha</string>
+    <string name="login_entrar">Entrar</string>
+
+    <string name="erro_autenticao">Usuário informado está incorreto!</string>
+
+    <string name="dash_novo_gasto">Novo Gasto</string>
+    <string name="dash_nova_viagem">Minhas Viagens</string>
+    <string name="dash_minhas_viagens">Minhas Viagens</string>
+    <string name="dash_config">Configurações</string>
+
 </resources>

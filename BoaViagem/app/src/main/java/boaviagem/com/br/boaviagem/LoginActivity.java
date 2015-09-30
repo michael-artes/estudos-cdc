@@ -1,16 +1,26 @@
 package boaviagem.com.br.boaviagem;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
+
+    private EditText usuario;
+    private EditText senha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        usuario = (EditText) findViewById(R.id.usuario);
+        senha = (EditText) findViewById(R.id.senha);
     }
 
     @Override
@@ -34,4 +44,26 @@ public class LoginActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+    public void entrarOnClick(View v){
+
+        String usuarioInformado = usuario.getText().toString();
+        String senhaInformada = senha.getText().toString();
+
+        if("admin".equals(usuarioInformado) && "123".equals(senhaInformada)) {
+
+            startActivity(new Intent(this, DashboardActivity.class));
+
+        } else {
+
+            String mensagemErro = getString(R.string.erro_autenticao);
+            Toast toast = Toast.makeText(this, mensagemErro, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+
 }
