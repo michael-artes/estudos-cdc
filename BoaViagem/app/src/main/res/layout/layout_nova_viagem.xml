@@ -10,7 +10,7 @@
         android:stretchColumns="0,1,2">
 
         <LinearLayout
-            android:background="#015488"
+            android:background="#838288"
             android:orientation="vertical">
 
             <TextView
@@ -19,7 +19,8 @@
                 android:layout_gravity="center"
                 android:text="@string/dash_nova_viagem"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
         <TextView android:text="@string/destino" />
