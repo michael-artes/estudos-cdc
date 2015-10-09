@@ -10,8 +10,25 @@
 	  <groupId>junit</groupId>
 	  <artifactId>junit</artifactId>
 	  <version>4.12</version>
-	  <scope>test</scope>
 	</dependency>  	
   </dependencies>
+  
+  <build>
+  	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.2</version>
+			<configuration>
+				<compilerArguments>
+					<encoding>ISO-8859-1</encoding>
+				</compilerArguments>
+				<source>1.7</source>
+				<target>1.7</target>
+				<compilerVersion>1.7</compilerVersion>
+			</configuration>
+		</plugin>  	
+  	</plugins>
+  </build>
   
 </project>
