@@ -1,4 +1,4 @@
-package br.com.livro.tdd;
+package br.com.livro.tdd.capitulo01e02;
 
 import org.junit.Assert;
 import org.junit.Test;
