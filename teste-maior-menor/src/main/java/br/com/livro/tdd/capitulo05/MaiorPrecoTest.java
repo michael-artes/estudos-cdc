@@ -21,7 +21,6 @@ public class MaiorPrecoTest {
 		assertEquals(0.0, carrinhoBuilder.cria().maiorValor(), 0.0001);
 	}
 	
-	
 	@Test
 	public void deveRetornarValorDoItemSeCarrinhoCom1Elemento() {
 		
@@ -37,7 +36,7 @@ public class MaiorPrecoTest {
 		
 		carrinhoBuilder.setNomes("Geladeira", "Fogão", "Máquina de Lavar");
 		carrinhoBuilder.setQuantidade(1, 2, 1);
-		carrinhoBuilder.setValores(900.00, 1500.0, 750.0);
+		carrinhoBuilder.setValores(900.0, 1500.0, 750.0);
 		
 		assertEquals(3000.0, carrinhoBuilder.montaItens().cria().maiorValor(), 0.0001);
 	}
