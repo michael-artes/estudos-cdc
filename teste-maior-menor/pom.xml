@@ -6,11 +6,21 @@
   <name>Testar Menor Maior</name>
   
   <dependencies>
+  
+  	<!-- Depencendia para testes unitarios -->
 	<dependency>
 	  <groupId>junit</groupId>
 	  <artifactId>junit</artifactId>
 	  <version>4.12</version>
-	</dependency>  	
+	</dependency> 
+	
+	<!-- Dependencia para mock de objetos --> 	
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-all</artifactId>
+		<version>1.10.19</version>
+	</dependency>
+	
   </dependencies>
   
   <build>

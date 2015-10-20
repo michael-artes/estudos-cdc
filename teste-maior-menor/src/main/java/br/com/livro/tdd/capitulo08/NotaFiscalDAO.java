@@ -1,9 +1,14 @@
 package br.com.livro.tdd.capitulo08;
 
-public class NotaFiscalDAO {
+public class NotaFiscalDAO implements AcaoAposGerarNota{
 	
-	public void persiste(NotaFiscal notaFiscal){
-		
+	private void persiste(NotaFiscal notaFiscal){
+		System.out.println("Persistindo a Nota");
+	}
+
+	@Override
+	public void executa(NotaFiscal nf) {
+		persiste(nf);
 	}
 
 }
