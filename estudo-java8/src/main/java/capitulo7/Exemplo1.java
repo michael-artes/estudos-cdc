@@ -30,7 +30,7 @@ public class Exemplo1 {
 		
 		usuarios.subList(0, 3).forEach(u -> {
 			u.tornarModerador();
-			System.out.println("Tornou usuario " + u.getNome() + " como moderador.");
+			System.out.println("Tornou usuario " + u.getNome() + " como moderador..");
 		});
 		
 		//Removendo usuarios com mais de 100 pontos
