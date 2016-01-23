@@ -6,11 +6,14 @@ public class HelloWord {
 	
 	public static void main(String[] args) throws ScriptException {
 		
+		System.out.println("Hello World Java 8");
+		
+		
 		//processor javascript
 		ScriptEngineManager engineManager = new ScriptEngineManager();
 		ScriptEngine engineByName = engineManager.getEngineByName("nashorn");
 		
-		engineByName.eval("load('src/main/java/helo.js')");
+		engineByName.eval("load('src/main/java/hello-world.js')");
 		
 		/*IntStream stream = IntStream.of(1, 2);
 		stream.forEach(System.out::println);
