@@ -148,7 +148,7 @@ public class Exemplo1 {
 		//manipulando arquivos com stream do Files
 		// e Exemplo com o flatMap
 		try {
-			Files.list(Paths.get("/home/mmoreira/git/estudos-cdc/estudo-java8/src/main/java"))
+			Files.list(Paths.get("/home/mmoreira/git/estudos-cdc/src/main/java"))
 				.filter(p -> p.toString().endsWith(".java"))
 				.flatMap(p -> lines(p))
 				.forEach(System.out::println);
@@ -160,7 +160,7 @@ public class Exemplo1 {
 		//flatMap encadeado
 		try {
 			
-			IntStream chars = Files.list(Paths.get("/home/mmoreira/git/estudos-cdc/estudo-java8/src/main/java"))
+			IntStream chars = Files.list(Paths.get("/home/mmoreira/git/estudos-cdc/src/main/java"))
 					.filter(p -> p.toString().endsWith(".java"))
 					.flatMap(p -> lines(p))
 					.flatMapToInt((String j) -> j.chars());
