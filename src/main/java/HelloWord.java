@@ -1,3 +1,6 @@
+import java.util.Collections;
+import java.util.List;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -5,6 +8,10 @@ import javax.script.ScriptException;
 public class HelloWord {
 	
 	public static void main(String[] args) throws ScriptException {
+		
+		List<String> ss = Collections.EMPTY_LIST;
+		
+		ss.forEach(s -> System.out.println(s));
 		
 		System.out.println("Hello World Java 8");
 		
