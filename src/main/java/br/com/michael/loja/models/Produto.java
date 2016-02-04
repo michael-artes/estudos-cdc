@@ -1,5 +1,9 @@
 package br.com.michael.loja.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +24,11 @@ public class Produto {
 	private String titulo;
 	
 	private String descricao;
+	
 	private Integer paginas;
+	
+	@ElementCollection
+	private List<Preco> precos = new ArrayList<Preco>();
 	
 	
 	public String getTitulo() {
@@ -47,6 +55,14 @@ public class Produto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public List<Preco> getPrecos() {
+		return precos;
+	}
+	public void setPrecos(List<Preco> precos) {
+		this.precos = precos;
+	}
+	
 	
 	@Override
 	public String toString() {

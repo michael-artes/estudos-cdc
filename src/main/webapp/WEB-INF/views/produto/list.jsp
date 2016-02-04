@@ -28,56 +28,42 @@
     
     <!-- Begin page content -->
     <div class="container">
-    
-      <div class="page-header">
-        <h1>Cadastro de Produtos</h1>
-      </div>
-      
-		<form method="post" action="salvar">
+		<div class="page-header">
+		  <h1>Lista de Produtos</h1>
+		</div>
 		
-		  <div class="form-group">
-		    <label for="titulo">Titulo</label>
-		    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo...">
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="descricao">Descrição</label>
-		    <textarea class="form-control" name="descricao" id="descricao" rows="3" cols="4" placeholder="Descrição..."></textarea>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="paginas">Qtd. Paginas</label>
-		    <input type="text" class="form-control" name="paginas" id="paginas" placeholder="Páginas...">
-		  </div>		  
-		  
-			<c:forEach items="${tipos}" var="livroTipo" varStatus="status">
+		<table class="table table-hover">
+			<tr>
+				<td>Titulo</td>
+				<td>Valores</td>
+			</tr>
 			
-			  <div class="form-group">
-			    <label for="preco_${livroTipo}">${livroTipo}</label>
-			    
-			    <div class="row">
-				    <div class="col-xs-4">
-					    <div class="input-group">
-					    	 <div class="input-group-addon">R$</div>
-						     <input type="text" class="form-control" name="precos[${status.index}].valor" id="preco_${livroTipo}">
-						     <input type="hidden" class="form-control" name="precos[${status.index}].livroTipo" value="${livroTipo}">
-					    </div>
-				    </div>
-			    </div>
-			    
-			  </div>
-			  
+			<c:forEach items="${produtos}" var="p">
+				<tr>
+					<td>${p.titulo}</td>
+				<td>
+					<c:forEach items="${p.precos}" var="preco">
+						[${preco.livroTipo} - ${preco.valor}]
+					</c:forEach>
+				</td>
+				</tr>
 			</c:forEach>
-			
-		  <button type="submit" class="btn btn-info">Enviar</button>
-		</form>
+		
+		</table>
+		
+		
+		<c:if test="${not empty sucesso}">
+			<p class="bg-primary">
+				${sucesso}
+			</p>
+		</c:if>
 		
 		
     </div>
 
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Copyrigth © 2015 - Spring MVC.</p>
+        <p class="text-muted">Copyrigth © 2015 - Spring MVC</p>
       </div>
     </footer>    
     
