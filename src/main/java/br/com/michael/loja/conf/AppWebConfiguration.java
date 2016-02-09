@@ -58,7 +58,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 	public FormattingConversionService mvcConversionService(){
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(true);
 		DateFormatterRegistrar registrar = new DateFormatterRegistrar();
-		registrar.setFormatter(new DateFormatter("yyyy-MM-dd}"));
+		registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
 		registrar.registerFormatters(conversionService);
 		
 		return conversionService;

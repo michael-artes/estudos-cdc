@@ -34,7 +34,6 @@ public class Produto {
 	private String descricao;
 	
 	@Min(30)
-	@NotBlank
 	private Integer paginas;
 	
 	@DateTimeFormat(iso=ISO.DATE)
@@ -74,6 +73,13 @@ public class Produto {
 	}
 	public void setPrecos(List<Preco> precos) {
 		this.precos = precos;
+	}
+	
+	public Calendar getLancementoData() {
+		return lancementoData;
+	}
+	public void setLancementoData(Calendar lancementoData) {
+		this.lancementoData = lancementoData;
 	}
 	
 	
