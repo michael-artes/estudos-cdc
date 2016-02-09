@@ -53,9 +53,9 @@
 		
 		
 		<c:if test="${not empty sucesso}">
-			<p class="bg-primary">
-				${sucesso}
-			</p>
+			<div class="alert alert-success">
+			  <strong>Success!</strong> ${sucesso}
+			</div>
 		</c:if>
 		
 		

@@ -1,4 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -33,22 +35,41 @@
         <h1>Cadastro de Produtos</h1>
       </div>
       
-		<form method="post" action="salvar">
+      	<spring:hasBindErrors name="produto">
+			<c:forEach items="${errors.allErrors}" var="error">
+					<div class="alert alert-danger">
+					  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					  <strong>Error!</strong>
+					  	<p><spring:message code="${error.code}" text="${error.defaultMessage}"/> <br/> </p>
+					</div>			
+			</c:forEach>      
+      	</spring:hasBindErrors>
+      	
+      
+		<form:form method="post" action="${spring:mvcUrl('PC#save').build()}" commandName="produto">
 		
 		  <div class="form-group">
 		    <label for="titulo">Titulo</label>
-		    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo...">
+		    <form:input path="titulo" cssClass="form-control" placeholder="Titulo..."/>
+		    <!-- <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo..."> -->
+		    <%-- <form:errors path="titulo"/> FUNCIONA SEM A TAG HASBINDERRORS POREM PRECISA ESTAR DENTRO DE FORM:FORM--%>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="descricao">Descrição</label>
-		    <textarea class="form-control" name="descricao" id="descricao" rows="3" cols="4" placeholder="Descrição..."></textarea>
+		    <form:textarea path="descricao" cssClass="form-control" rows="3" cols="4" placeholder="Descrição..."/>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="paginas">Qtd. Paginas</label>
-		    <input type="text" class="form-control" name="paginas" id="paginas" placeholder="Páginas...">
-		  </div>		  
+		    <form:input path="paginas" cssClass="form-control" placeholder="Páginas......"/>
+		  </div>
+		  
+		  <div>
+			<label for="lancementoData">Data de lançamento</label>
+			<form:input path="lancementoData" type="date" cssClass="form-control" placeholder="Data de lançamento......"/>
+			<form:errors path="lancementoData"/>
+		  </div>
 		  
 			<c:forEach items="${tipos}" var="livroTipo" varStatus="status">
 			
@@ -59,8 +80,8 @@
 				    <div class="col-xs-4">
 					    <div class="input-group">
 					    	 <div class="input-group-addon">R$</div>
-						     <input type="text" class="form-control" name="precos[${status.index}].valor" id="preco_${livroTipo}">
-						     <input type="hidden" class="form-control" name="precos[${status.index}].livroTipo" value="${livroTipo}">
+						     <form:input path="precos[${status.index}].valor" cssClass="form-control" id="preco_${livroTipo}"/>
+						     <form:hidden path="precos[${status.index}].livroTipo" cssClass="form-control" value="${livroTipo}"/>
 					    </div>
 				    </div>
 			    </div>
@@ -70,7 +91,7 @@
 			</c:forEach>
 			
 		  <button type="submit" class="btn btn-info">Enviar</button>
-		</form>
+		</form:form>
 		
 		
     </div>

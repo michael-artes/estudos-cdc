@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,19 +33,35 @@ import br.com.michael.loja.models.Produto;
 public class ProdutosController {
 	
 	@Autowired
-	ProdutoDAO produtoDAO; 
+	ProdutoDAO produtoDAO;
+	
+	//Fala pro spring qual classe ira utilizar validacoes
+	//Nao precisa pois agora esta sendo utilizado bean validator
+	/*@InitBinder
+	protected void initBinder(WebDataBinder binder){
+		binder.setValidator(new ProdutoValidator());
+	}*/
+	
 	
 	@RequestMapping(value="cadastro", method=RequestMethod.GET)
-	public ModelAndView form(){
+	public ModelAndView form(Produto produto){
 		ModelAndView view = new ModelAndView("/produto/form");
 		view.addObject("tipos", LivroTipo.values());
 		return view;
 	}
 	
 	@RequestMapping(value="salvar", method=RequestMethod.POST)
-	public ModelAndView save(Produto produto, RedirectAttributes attributes){
+	public ModelAndView save(@Validated Produto produto, BindingResult bindingResult ,RedirectAttributes attributes){
+		
+		ModelAndView view = null;
+		
+		if (bindingResult.hasErrors()) {
+			return form(produto);
+		}
+		
 		produtoDAO.save(produto);
-		ModelAndView view = new ModelAndView("redirect:listagem");
+		
+		view = new ModelAndView("redirect:listagem");
 		
 		//mantem a cada request os objetos na sessao
 		attributes.addFlashAttribute("sucesso", "Produto inserido com sucesso");

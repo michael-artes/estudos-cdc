@@ -1,6 +1,7 @@
 package br.com.michael.loja.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -10,6 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name="produto", schema="public")
@@ -21,11 +27,18 @@ public class Produto {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="prod_seq")
 	private Integer id;
 	
+	@NotBlank
 	private String titulo;
 	
+	@NotBlank
 	private String descricao;
 	
+	@Min(30)
+	@NotBlank
 	private Integer paginas;
+	
+	@DateTimeFormat(iso=ISO.DATE)
+	private Calendar lancementoData;
 	
 	@ElementCollection
 	private List<Preco> precos = new ArrayList<Preco>();
