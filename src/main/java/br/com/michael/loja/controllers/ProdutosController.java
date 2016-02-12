@@ -15,12 +15,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.michael.loja.daos.ProdutoDAO;
 import br.com.michael.loja.models.LivroTipo;
 import br.com.michael.loja.models.Produto;
+import br.com.michael.loja.service.SalvarArquivo;
 
 /**
  * @author mmoreira
@@ -34,6 +36,10 @@ public class ProdutosController {
 	
 	@Autowired
 	ProdutoDAO produtoDAO;
+
+	@Autowired
+	private SalvarArquivo salvarArquivo;
+	
 	
 	//Fala pro spring qual classe ira utilizar validacoes
 	//Nao precisa pois agora esta sendo utilizado bean validator
@@ -51,7 +57,7 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping(value="salvar", method=RequestMethod.POST)
-	public ModelAndView save(@Validated Produto produto, BindingResult bindingResult ,RedirectAttributes attributes){
+	public ModelAndView save(MultipartFile sumario, @Validated Produto produto, BindingResult bindingResult ,RedirectAttributes attributes){
 		
 		ModelAndView view = null;
 		
@@ -59,6 +65,10 @@ public class ProdutosController {
 			return form(produto);
 		}
 		
+
+		String webPath = salvarArquivo.writer("upload-arquivos", sumario);
+		
+		produto.setSumarioPath(webPath);
 		produtoDAO.save(produto);
 		
 		view = new ModelAndView("redirect:listagem");

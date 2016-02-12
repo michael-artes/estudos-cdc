@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -41,6 +42,9 @@ public class Produto {
 	
 	@ElementCollection
 	private List<Preco> precos = new ArrayList<Preco>();
+	
+	@Transient
+	private String sumarioPath;
 	
 	
 	public String getTitulo() {
@@ -80,6 +84,13 @@ public class Produto {
 	}
 	public void setLancementoData(Calendar lancementoData) {
 		this.lancementoData = lancementoData;
+	}
+	
+	public String getSumarioPath() {
+		return sumarioPath;
+	}
+	public void setSumarioPath(String sumarioPath) {
+		this.sumarioPath = sumarioPath;
 	}
 	
 	

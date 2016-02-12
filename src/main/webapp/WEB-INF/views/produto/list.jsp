@@ -58,6 +58,8 @@
 			</div>
 		</c:if>
 		
+		<img src="http://localhost:9444/s3/s3Amazon/screenie.png" alt="teste" class="img-responsive img-rounded">
+		
 		
     </div>
 

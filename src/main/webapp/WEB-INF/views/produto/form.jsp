@@ -46,7 +46,7 @@
       	</spring:hasBindErrors>
       	
       
-		<form:form method="post" action="${spring:mvcUrl('PC#save').build()}" commandName="produto">
+		<form:form method="post" action="${spring:mvcUrl('PC#save').build()}" commandName="produto" enctype="multipart/form-data">
 		
 		  <div class="form-group">
 		    <label for="titulo">Titulo</label>
@@ -65,11 +65,18 @@
 		    <form:input path="paginas" cssClass="form-control" placeholder="Páginas......"/>
 		  </div>
 		  
-		  <div>
+		  <div class="form-group">
 			<label for="lancementoData">Data de lançamento</label>
 			<form:input path="lancementoData" type="date" cssClass="form-control" placeholder="Data de lançamento......"/>
 			<form:errors path="lancementoData"/>
 		  </div>
+		  
+		  <div class="form-group">
+		    <label for="sumario">Anexar Arquivo</label>
+		    <input type="file" name="sumario">
+		    <p class="help-block">Favor enviar arquivos para upload!</p>
+		    <form:errors path="sumarioPath"/>
+		  </div>  
 		  
 			<c:forEach items="${tipos}" var="livroTipo" varStatus="status">
 			
@@ -77,7 +84,7 @@
 			    <label for="preco_${livroTipo}">${livroTipo}</label>
 			    
 			    <div class="row">
-				    <div class="col-xs-4">
+				    <div class="col-md-4">
 					    <div class="input-group">
 					    	 <div class="input-group-addon">R$</div>
 						     <form:input path="precos[${status.index}].valor" cssClass="form-control" id="preco_${livroTipo}"/>
@@ -91,6 +98,7 @@
 			</c:forEach>
 			
 		  <button type="submit" class="btn btn-info">Enviar</button>
+		  
 		</form:form>
 		
 		
