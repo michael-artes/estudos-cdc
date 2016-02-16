@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import capitulo2.Usuario;
 
+//Ordenações
 public class Exemplo1 {
 	
 	public static void main(String[] args) {
