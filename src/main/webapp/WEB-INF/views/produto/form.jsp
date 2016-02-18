@@ -97,7 +97,10 @@
 			  
 			</c:forEach>
 			
-		  <button type="submit" class="btn btn-info">Enviar</button>
+			<p>
+			  <button type="submit" class="btn btn-primary">Enviar</button>
+			  <a href="${spring:mvcUrl('PC#list').build()}" class="btn btn-success" role="button">Listagem Produto</a>
+			</p>
 		  
 		</form:form>
 		

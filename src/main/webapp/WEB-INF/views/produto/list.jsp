@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -32,24 +33,51 @@
 		  <h1>Lista de Produtos</h1>
 		</div>
 		
-		<table class="table table-hover">
-			<tr>
-				<td>Titulo</td>
-				<td>Valores</td>
-			</tr>
-			
-			<c:forEach items="${produtos}" var="p">
-				<tr>
-					<td>${p.titulo}</td>
-				<td>
-					<c:forEach items="${p.precos}" var="preco">
-						[${preco.livroTipo} - ${preco.valor}]
-					</c:forEach>
-				</td>
-				</tr>
-			</c:forEach>
+		<div class="table-responsive">
 		
-		</table>
+			<table class="table table-hover">
+				<tr>
+					<th> <span class="glyphicon glyphicon-level-up"></span> </th>
+					<td>Titulo</td>
+					<td>Valores</td>
+				</tr>
+				
+				<c:forEach items="${produtos}" var="produto">
+					<tr>
+						<td> <img src="http://localhost:9444/s3/s3Amazon/prod-${produto.id}-img.png" class="img-responsive img-rounded" alt="Responsive image"> </td>
+						<td> 
+							
+							<a href="${spring:mvcUrl('PC#show').arg(0,produto.id).build()}">
+								<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+							</a>
+						
+							<p>
+								${produto.titulo}
+							</p>
+							
+							<hr/>
+							
+							<p>
+								<i>Paginas: ${produto.paginas}</i>
+							</p>
+							
+						</td>
+					<td style="width:25%">
+						<c:forEach items="${produto.precos}" var="preco">
+							<c:if test="${preco.valor != null}">
+								<p>
+									[${preco.livroTipo} - ${preco.valor}]
+								</p>
+							</c:if>
+						</c:forEach>
+					</td>
+					</tr>
+				</c:forEach>
+			
+			</table>
+			
+		</div>
+		
 		
 		
 		<c:if test="${not empty sucesso}">
@@ -58,8 +86,10 @@
 			</div>
 		</c:if>
 		
-		<img src="http://localhost:9444/s3/s3Amazon/screenie.png" alt="teste" class="img-responsive img-rounded">
-		
+		<p>
+			<a href="${spring:mvcUrl('PC#form').build()}" class="btn btn-primary" role="button">Cadastrar Produto</a>
+			<a href="${spring:mvcUrl('CC#items').build()}" class="btn btn-info" role="button">Carrinho de Compras</a>
+		</p>
 		
     </div>
 

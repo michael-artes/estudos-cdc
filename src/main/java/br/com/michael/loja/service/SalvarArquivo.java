@@ -13,6 +13,8 @@ import com.amazonaws.services.s3.S3ClientOptions;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+import br.com.michael.loja.models.Produto;
+
 @Component
 public class SalvarArquivo {
 	
@@ -22,12 +24,12 @@ public class SalvarArquivo {
 	/*@Autowired
 	private HttpServletRequest request;*/
 
-	public String writer(String pastaArquivo, MultipartFile sumario) {
+	public String writer(Produto produto, MultipartFile sumario) {
 		
 		PutObjectRequest putObjectRequest = null;
 		
 		try {
-			putObjectRequest = new PutObjectRequest(bucket, sumario.getOriginalFilename(), sumario.getInputStream(), new ObjectMetadata());
+			putObjectRequest = new PutObjectRequest(bucket, "prod-"+produto.getId()+"-img.png", sumario.getInputStream(), new ObjectMetadata());
 			
 			AmazonS3Client client = client();
 			client.putObject(putObjectRequest);

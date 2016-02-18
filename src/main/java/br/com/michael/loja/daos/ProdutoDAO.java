@@ -18,6 +18,10 @@ public class ProdutoDAO {
 	public void save(Produto produto) {
 		entityManager.persist(produto);
 	}
+	
+	public Produto findById(Integer id){
+		return entityManager.find(Produto.class, id);
+	}
 
 	
 	public List<Produto> list() {

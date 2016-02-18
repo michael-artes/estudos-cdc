@@ -12,7 +12,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,29 +51,32 @@ public class ProdutosController {
 	}*/
 	
 	
-	@RequestMapping(value="cadastro", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET, value="cadastro")
 	public ModelAndView form(Produto produto){
 		ModelAndView view = new ModelAndView("/produto/form");
 		view.addObject("tipos", LivroTipo.values());
 		return view;
 	}
 	
-	@RequestMapping(value="salvar", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST, value="salvar")
 	public ModelAndView save(MultipartFile sumario, @Validated Produto produto, BindingResult bindingResult ,RedirectAttributes attributes){
 		
 		ModelAndView view = null;
 		
+		if (!sumario.getContentType().equals("image/png")) {
+			bindingResult.addError(new ObjectError("not.denied", "Somente arquivos .png"));
+		}
+
 		if (bindingResult.hasErrors()) {
 			return form(produto);
 		}
 		
-
-		String webPath = salvarArquivo.writer("upload-arquivos", sumario);
-		
-		produto.setSumarioPath(webPath);
 		produtoDAO.save(produto);
 		
-		view = new ModelAndView("redirect:listagem");
+		String webPath = salvarArquivo.writer(produto, sumario);
+		produto.setSumarioPath(webPath);
+		
+		view = new ModelAndView("redirect:/produto/listagem");
 		
 		//mantem a cada request os objetos na sessao
 		attributes.addFlashAttribute("sucesso", "Produto inserido com sucesso");
@@ -79,7 +84,7 @@ public class ProdutosController {
 		return view;
 	}
 	
-	@RequestMapping(value="listagem", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET, value="listagem")
 	public ModelAndView list(){
 		
 		List<Produto> list = produtoDAO.list()
@@ -92,6 +97,18 @@ public class ProdutosController {
 		ModelAndView view = new ModelAndView("/produto/list");
 		view.addObject("produtos", list);
 		return view;
+	}
+	
+	
+	@RequestMapping(method=RequestMethod.GET, value="/{id}")
+	public ModelAndView show(@PathVariable("id") Integer id){
+		
+		ModelAndView view = new ModelAndView("/produto/show");
+		
+		Produto produto = produtoDAO.findById(id);
+		view.addObject("produto", produto);
+		
+		return view;		
 	}
 
 }

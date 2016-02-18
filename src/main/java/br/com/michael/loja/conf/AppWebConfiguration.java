@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.michael.loja.controllers.HomeController;
 import br.com.michael.loja.daos.ProdutoDAO;
+import br.com.michael.loja.models.Carrinho;
 import br.com.michael.loja.service.SalvarArquivo;
 
 /**
@@ -28,7 +29,7 @@ import br.com.michael.loja.service.SalvarArquivo;
  */
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class, SalvarArquivo.class})
+@ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class, SalvarArquivo.class, Carrinho.class})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 
 	@Bean
