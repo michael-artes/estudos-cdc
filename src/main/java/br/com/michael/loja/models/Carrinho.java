@@ -12,11 +12,19 @@ import org.springframework.web.context.WebApplicationContext;
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class Carrinho {
+	
 
 	private Map<CarrinhoItens, Integer> items = new LinkedHashMap<CarrinhoItens, Integer>();
 
 	public void adicionar(CarrinhoItens item) {
 		items.put(item, getQuantidade(item) + 1);
+	}
+
+	
+	public void atualizar(CarrinhoItens item, Integer qtd) {
+		if (items.containsKey(item)) {
+			items.put(item, qtd);
+		}
 	}
 
 	public Integer getQuantidade(CarrinhoItens item) {

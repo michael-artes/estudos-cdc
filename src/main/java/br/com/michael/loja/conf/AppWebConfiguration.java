@@ -11,6 +11,7 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -60,6 +61,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 	
 	@Bean
 	public FormattingConversionService mvcConversionService(){
+		
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(true);
 		DateFormatterRegistrar registrar = new DateFormatterRegistrar();
 		registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
@@ -71,6 +73,11 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 	@Bean
 	public MultipartResolver multipartResolver(){
 		return new StandardServletMultipartResolver();
+	}
+	
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
 	}
 	
 }

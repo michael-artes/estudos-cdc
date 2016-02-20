@@ -38,6 +38,14 @@
 		<div class="page-header">
 			<h1> <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Detalhes do Produto</h1>
 		</div>
+		
+			<c:if test="${invalidLivroTipo != null}">
+				<div class="alert alert-danger">
+				  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				  <strong>Error!</strong>
+				  	<p> ${invalidLivroTipo} </p>
+				</div>			
+			</c:if>		
 
 
 			<div class="row">
@@ -58,18 +66,17 @@
 								<div class="list-group text-center">
 		
 									<c:forEach var="preco" items="${produto.precos}">
-		
-		
-										<div class="radio-inline">
-										  <label>
-										    <input type="radio" value="${preco.livroTipo}" name="livroTipo" 
-										    	id="${produto.id}-${preco.livroTipo}" ${preco.livroTipo.name() == 'COMBO' ? 'checked' : ''}>
-										    	
-										    ${preco.livroTipo}  -  <strong> ${preco.valor} </strong>	
-										  </label>
-										  
-										  
-										</div>	
+									
+										<c:if test="${preco.valor != null}">
+											<div class="radio-inline">
+											  <label>
+											    <input type="radio" value="${preco.livroTipo}" name="livroTipo" 
+											    	id="${produto.id}-${preco.livroTipo}" ${preco.livroTipo.name() == 'COMBO' ? 'checked' : ''}>
+											    	
+											    ${preco.livroTipo}  -  <strong> ${preco.valor} </strong>	
+											  </label>
+											</div>	
+										</c:if>
 		
 		
 									</c:forEach>

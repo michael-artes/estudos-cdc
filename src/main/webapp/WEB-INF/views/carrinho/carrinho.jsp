@@ -1,4 +1,4 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -38,6 +38,13 @@
 			</div>
 			
 			
+			<c:if test="${invalidQuantidade != null}">
+				<div class="alert alert-danger">
+				  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				  <strong>Error!</strong>
+				  	<p> ${invalidQuantidade} </p>
+				</div>			
+			</c:if>
 			
 			<table class="table table-striped">
 
@@ -61,13 +68,26 @@
 							<td> ${carrinhoIten.produto.titulo}-${carrinhoIten.livroTipo} </td>
 							<td> ${carrinhoIten.preco} </td>
 							<td style="width: 20%"> 
+							
+								<form:form servletRelativeAction="/carrinho/atualizar" method="post">
+
+									<div class="row">
+									  <div class="col-lg-12">
+									    <div class="input-group">
+									      <input type="hidden" name="idProduto" value="${carrinhoIten.produto.id}">
+									      <input type="number" class="form-control" name="qtdProdutoId" value="${sessionScope.carrinho.getQuantidade(carrinhoIten)}">
+									      <span class="input-group-btn">
+									        <button class="btn btn-warning" type="submit"> <span class="glyphicon glyphicon glyphicon-pencil"></span> </button>
+									      </span>
+									    </div><!-- /input-group -->
+									  </div><!-- /.col-lg-12 -->									
+									</div>
+									
+								</form:form>							
 								
-								<div class="input-group">
-									<input type="number" class="form-control" name="quantidade" value="${sessionScope.carrinho.getQuantidade(carrinhoIten)}"> 
-								 	<span class="input-group-addon" id="basic-addon${carrinhoIten.produto.id}">
-								 	<span class="glyphicon glyphicon glyphicon-pencil"></span></span>
-								</div>								
+								
 							</td>
+							
 							<td> ${sessionScope.carrinho.getTotal(carrinhoIten)} </td>
 							<td> 
 							
@@ -85,7 +105,25 @@
 				</tbody>
 				
 				<tfoot>
+					
+					<tr class="warning">
+					
+						<th colspan="4"> 
+							
+							<form action="${spring:mvcUrl('PC#finalizarCompra').build()}" method="post">
+								<button type="submit" class="btn btn-warning">
+									<span class="glyphicon glyphicon-download"></span> Comprar
+								</button> 
+							</form>
+							
+						</th>
+						<th colspan="2"> Total: ${sessionScope.carrinho.total} </th>
+					
+					</tr>
+				
 				</tfoot>
+				
+				
 			
 			</table>		
 			

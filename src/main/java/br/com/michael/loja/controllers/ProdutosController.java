@@ -59,7 +59,7 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="salvar")
-	public ModelAndView save(MultipartFile sumario, @Validated Produto produto, BindingResult bindingResult ,RedirectAttributes attributes){
+	public ModelAndView save(MultipartFile sumario, @Validated Produto produto, BindingResult bindingResult , RedirectAttributes attributes){
 		
 		ModelAndView view = null;
 		
