@@ -1,6 +1,7 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -96,6 +97,32 @@
 			  </div>
 			  
 			</c:forEach>
+			
+			
+			<%-- 
+				MODO NORMAL
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+			
+			--%>
+			
+
+			<%-- 
+				FORMA MAIS SIMPLES
+			 --%>
+
+			<security:csrfInput/>
+			
+			
+			<%-- 
+			
+				OUTR FORMA SERIA ANOTAR A CLASSE SecurityConfiguration COM @EnableWebMvcSecurity
+				
+				E USAR EM TODOS OS FORMS O FORM DO SPRING
+				
+				EX: <FORM:FORM> </FORM:FORM>
+				
+				COM ISS NAO SERIA PRECISO FICAR PASSANDO O CSRF TOKEN
+			 --%>
 			
 			<p>
 			  <button type="submit" class="btn btn-primary">Enviar</button>

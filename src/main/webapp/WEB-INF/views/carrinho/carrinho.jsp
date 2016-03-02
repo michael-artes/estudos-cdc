@@ -130,6 +130,7 @@
 			<p>
 				<a href="${spring:mvcUrl('PC#form').build()}" class="btn btn-primary" role="button">Cadastrar Produto</a>
 				<a href="${spring:mvcUrl('PC#list').build()}" class="btn btn-success" role="button">Listagem Produto</a>
+				<a href="<c:url value="/logout" />" class="btn btn-danger" role="button">Logout</a>
 			</p>
 	    </div>	
 	
@@ -139,7 +140,7 @@
 	      </div>
 	    </footer>    
 	    
-	
+	    
 	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <script src="${pageContext.servletContext.contextPath}/resources/jquery/jquery-1.12.0.min.js"></script>
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->

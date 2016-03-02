@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -17,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -59,6 +62,7 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="salvar")
+	@CacheEvict(value="livros", allEntries=true)
 	public ModelAndView save(MultipartFile sumario, @Validated Produto produto, BindingResult bindingResult , RedirectAttributes attributes){
 		
 		ModelAndView view = null;
@@ -84,8 +88,16 @@ public class ProdutosController {
 		return view;
 	}
 	
+	/**
+	 * 
+	 * este método retorna .json ou .xml desde que eu defina a extensão
+	 * no final da url ex.: produtos.json - configuração no AppWebConfiguration
+	 * 
+	 * */
+	
 	@RequestMapping(method=RequestMethod.GET, value="listagem")
-	public ModelAndView list(){
+	@Cacheable(value="livros")
+	public ModelAndView list(){ 
 		
 		List<Produto> list = produtoDAO.list()
 			.stream().peek(p -> {
@@ -97,6 +109,21 @@ public class ProdutosController {
 		ModelAndView view = new ModelAndView("/produto/list");
 		view.addObject("produtos", list);
 		return view;
+	}
+	
+	
+	@RequestMapping(method=RequestMethod.GET, value="json-livros")
+	@ResponseBody
+	public List<Produto> listJson(){
+		
+		List<Produto> list = produtoDAO.list()
+			.stream().peek(p -> {
+				p.getPrecos().sort(Comparator.comparing(pr -> pr.getLivroTipo().toString()));
+			})
+			.sorted(Comparator.comparing(Produto::getTitulo))
+			.collect(Collectors.toList());
+		
+		return list;
 	}
 	
 	

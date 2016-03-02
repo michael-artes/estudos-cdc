@@ -1,5 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -31,6 +32,22 @@
     <div class="container">
 		<div class="page-header">
 		  <h1>Lista de Produtos</h1>
+		  
+		  <hr>
+		  <p>
+		  	<security:authorize access="isAuthenticated()">
+			  	<security:authentication property="principal" var="user"/> 
+			  	<span class="glyphicon glyphicon-user"></span> ${user.name} Loggued
+		  	</security:authorize>
+		  </p>
+		  
+			<%--
+			Poderia ser usado tbm dessa form 
+			<security:authorize access="hasRole('ROLE_ADMIN')">
+				<li>
+				<a href="${spring:mvcUrl('PC#form').build()}">Cadastrar novo produto</a>
+				</li>
+			</security:authorize> --%>
 		</div>
 		
 		<div class="table-responsive">
