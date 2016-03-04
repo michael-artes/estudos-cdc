@@ -30,6 +30,22 @@
   </head>
   
   <body>
+  
+  	
+  	<span class="glyphicon glyphicon-th-list"></span>
+  	<p>
+  		<a href="<c:url value="/produto/listagem?locale=pt"/>">
+		Português
+		</a>
+  	</p>
+  	
+  	<span class="glyphicon glyphicon-th-list"></span>
+  	<p>
+  		<a href="<c:url value="/produto/listagem?locale=en_US"/>">
+		Ingles
+		</a>
+  	</p>
+  
 
 	<jsp:doBody/>
 	
