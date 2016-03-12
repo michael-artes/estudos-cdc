@@ -41,7 +41,7 @@ public class Produto {
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private Calendar lancementoData;
 	
-	@ElementCollection(fetch=FetchType.EAGER)
+	@ElementCollection(fetch=FetchType.LAZY)
 	private List<Preco> precos = new ArrayList<Preco>();
 	
 	@Transient

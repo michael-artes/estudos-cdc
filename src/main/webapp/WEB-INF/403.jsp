@@ -41,6 +41,10 @@
 		
 		<img src="http://localhost:9444/s3/s3Amazon/403-page.png" class="img-responsive img-thumbnail" alt="Sucesso">
 
+		<p>
+			<a href="<c:url value="/produto/listagem"/>" class="btn btn-success" role="button">Listagem Produto </a> 
+		</p>
+
 	</div>
 
 	<footer class="footer">

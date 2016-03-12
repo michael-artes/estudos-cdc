@@ -30,7 +30,6 @@ public class CarrinhoController {
 	private Carrinho carrinho;
 	
 	
-	
 	@RequestMapping(method=RequestMethod.POST, value="adicionar")
 	public ModelAndView adicionar(Integer produtoId, LivroTipo livroTipo, RedirectAttributes attributes){
 		

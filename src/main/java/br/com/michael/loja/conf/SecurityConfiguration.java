@@ -24,16 +24,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-			.antMatchers("/produto/cadastro").hasRole("ADMIN")
-			.antMatchers("/carrinho/**").permitAll()
-			.antMatchers(HttpMethod.POST, "/produto").hasRole("ADMIN")
-			.antMatchers("/produto/**").permitAll()
-			.anyRequest().authenticated()
-			.and().formLogin()
-			.loginPage("/login").permitAll()
-			.usernameParameter("loginUser").passwordParameter("senhaUser")
-			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-		
+		.antMatchers("/produto/cadastro").hasRole("ADMIN")
+		.antMatchers("/carrinho/**").permitAll()
+		.antMatchers(HttpMethod.POST,"/produto").hasRole("ADMIN")
+		.antMatchers("/produto/**").permitAll()
+		.antMatchers("/pagamento/**").hasAnyRole("ADMIN", "COMPRADOR")
+		.anyRequest().authenticated()
+		.and()
+		.formLogin().loginPage("/login").permitAll()
+		.usernameParameter("loginUser").passwordParameter("senhaUser")
+		.defaultSuccessUrl("/produto/listagem")
+		.and()
+		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+
 	}
 	
 	

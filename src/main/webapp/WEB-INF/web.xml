@@ -7,10 +7,10 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-
+	
 	<error-page>
 		<error-code>403</error-code>
 		<location>/WEB-INF/403.jsp</location>
-	</error-page>
+	</error-page>	
 
 </web-app>

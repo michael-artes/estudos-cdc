@@ -23,11 +23,14 @@ public class ProdutoDAO {
 	}
 	
 	public Produto findById(Integer id){
-		return entityManager.find(Produto.class, id);
+		TypedQuery<Produto> query = entityManager.createQuery(
+						"select distinct(p) from Produto p join fetch p.precos where p.id=:id",
+						Produto.class).setParameter("id", id);
+		return query.getSingleResult();
 	}
 
 	public List<Produto> list() {
-		return entityManager.createQuery("select distinct(p) from Produto p join fetch p.precos", Produto.class)
+		return entityManager.createQuery("select distinct(p) from Produto p", Produto.class)
 							.getResultList();
 	}
 	

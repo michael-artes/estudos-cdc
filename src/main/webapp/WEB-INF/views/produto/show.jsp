@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -60,6 +61,8 @@
 							</p>
 	
 							<form:form servletRelativeAction="/carrinho/adicionar" method="post">
+								
+								<security:csrfInput/>
 							
 								<input type="hidden" name="produtoId" value="${produto.id}">
 							

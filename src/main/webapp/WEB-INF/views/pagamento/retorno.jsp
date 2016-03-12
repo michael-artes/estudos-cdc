@@ -47,6 +47,13 @@
 				<img src="http://localhost:9444/s3/s3Amazon/400-bad-request.png" class="img-responsive img-thumbnail" alt="Sucesso">
 			</c:otherwise>
 		</c:choose>
+		
+		<p>
+			<a href="${spring:mvcUrl('PC#form').build()}" class="btn btn-primary" role="button">Cadastrar Produto </a> 
+			<a href="${spring:mvcUrl('PC#list').build()}" class="btn btn-success" role="button">Listagem Produto </a> 
+			<a href="${spring:mvcUrl('CC#items').build()}" class="btn btn-info" role="button">Carrinho de Compras</a>
+			
+		</p>		
 
 	</div>
 
