@@ -6,6 +6,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -18,12 +21,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JPAConfiguration {
 	
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource){
 		
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(getDataSource());
+		em.setDataSource(dataSource);
 		em.setPackagesToScan(new String[]{"br.com.michael.loja.models"});
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(getAdditionalProperties());
@@ -46,7 +49,8 @@ public class JPAConfiguration {
 	
 	
 	@Bean
-	public DataSource getDataSource() {
+	@Profile("production")
+	public DataSource getDataSource(Environment environment) {
 		DriverManagerDataSource driver = new DriverManagerDataSource();
 		driver.setDriverClassName("org.postgresql.Driver");
 		driver.setUrl("jdbc:postgresql://localhost:5432/spring-mvn-cdc");
@@ -63,6 +67,13 @@ public class JPAConfiguration {
 		manager.setEntityManagerFactory(em);
 		
 		return manager;
+	}
+	
+	
+	
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
 	}
 
 }

@@ -106,7 +106,7 @@ public class ProdutosController {
 			.sorted(Comparator.comparing(Produto::getTitulo))
 			.collect(Collectors.toList());
 		
-		ModelAndView view = new ModelAndView("/produto/list");
+		ModelAndView view = new ModelAndView("produto/list");
 		view.addObject("produtos", list);
 		return view;
 	}
