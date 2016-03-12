@@ -32,6 +32,11 @@ import br.com.michael.loja.conf.SecurityConfiguration;
 import br.com.michael.loja.confg.DataSourceConfigurationTest;
 import br.com.michael.loja.models.Produto;
 
+/**
+ * o spring permite testes com dbunit
+ * 
+ * */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {
