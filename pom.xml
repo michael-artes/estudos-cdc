@@ -63,21 +63,18 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>1.6.1</version>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.1</version>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
-			<scope>runtime</scope>
 		</dependency>
 
 		<!-- configuracao jpa e driver -->
@@ -193,8 +190,8 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		
-		
+
+
 		<!-- TESTES UNITARIOS - JUNIT -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -211,13 +208,13 @@
 			<version>4.1.0.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<version>4.0.0.M2</version>
 			<scope>test</scope>
-		</dependency>	
+		</dependency>
 
 
 		<!-- EMAIS COM JAVA -->
@@ -256,6 +253,22 @@
 					<compilerVersion>1.8</compilerVersion>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 	</build>
 
