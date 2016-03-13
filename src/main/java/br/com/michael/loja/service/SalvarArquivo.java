@@ -51,7 +51,7 @@ public class SalvarArquivo {
 		
 		String path = realPath + "/" + String.format(fileName, produto.getId());
 		
-		LOGGER.debug("path do arquivo: " + path);
+		LOGGER.info("path do arquivo: " + path);
 		
 		try {
 			
