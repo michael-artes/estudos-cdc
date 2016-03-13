@@ -1,1 +1,1 @@
-web:    java -cp -Dspring.profiles.active=prod-heroku  target/classes:target/dependency/* Main
+web: java $JAVA_OPTS -jar -Dspring.profiles.active=prod-heroku target/dependency/jetty-runner.jar --port $PORT target/*.war
