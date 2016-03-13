@@ -57,7 +57,7 @@ public class ProdutosController {
 	
 	@RequestMapping(method=RequestMethod.GET, value="cadastro")
 	public ModelAndView form(Produto produto){
-		ModelAndView view = new ModelAndView("/produto/form");
+		ModelAndView view = new ModelAndView("produto/form");
 		view.addObject("tipos", LivroTipo.values());
 		return view;
 	}
