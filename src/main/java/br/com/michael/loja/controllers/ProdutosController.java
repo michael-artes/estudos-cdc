@@ -39,6 +39,7 @@ import br.com.michael.loja.service.SalvarArquivo;
 @RequestMapping("/produto")
 public class ProdutosController {
 	
+	
 	@Autowired
 	ProdutoDAO produtoDAO;
 
@@ -78,6 +79,7 @@ public class ProdutosController {
 		produtoDAO.save(produto);
 		
 		String webPath = salvarArquivo.writer(produto, sumario);
+		
 		produto.setSumarioPath(webPath);
 		
 		view = new ModelAndView("redirect:/produto/listagem");

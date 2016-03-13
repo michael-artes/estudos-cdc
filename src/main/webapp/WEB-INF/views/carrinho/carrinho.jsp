@@ -30,12 +30,44 @@
 	
 	<body>
 	
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="${pageContext.servletContext.contextPath}/">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+	            <a href="${pageContext.servletContext.contextPath}/logout">
+					<security:authorize access="isAuthenticated()">
+						<security:authentication property="principal" var="user" />
+						<span class="glyphicon glyphicon-user"></span>
+						<spring:message code="users.welcome" arguments="${user.name}" />
+					</security:authorize>
+					| Logout
+	           	</a>
+           	</li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>	
+	
 	
 	    <!-- Begin page content -->
 	    <div class="container">
 	    
 	        <div class="page-header">
-				<h1> <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Detalhes do Produto</h1>
+				<h1> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Carrinho de Compras</h1>
 			</div>
 			
 			
@@ -65,7 +97,9 @@
 					<c:forEach items="${sessionScope.carrinho.list}" var="carrinhoIten">
 					
 						<tr>
-							<td> <img src="http://localhost:9444/s3/s3Amazon/prod-${carrinhoIten.produto.id}-img.png" class="img-responsive img-rounded" alt="Responsive image"> </td>
+							<%-- <td> <img src="http://localhost:9444/s3/s3Amazon/prod-${carrinhoIten.produto.id}-img.png" class="img-responsive img-rounded" alt="Responsive image"> </td> --%>
+							
+							<td> <img src="<c:url value="/resources/imagens/uploads/prod-${carrinhoIten.produto.id}-img.png"/>" class="img-responsive img-rounded" alt="Responsive image"> </td>
 							<td> ${carrinhoIten.produto.titulo}-${carrinhoIten.livroTipo} </td>
 							<td> ${carrinhoIten.preco} </td>
 							<td style="width: 20%"> 
@@ -135,7 +169,6 @@
 			<p>
 				<a href="${spring:mvcUrl('PC#form').build()}" class="btn btn-primary" role="button">Cadastrar Produto</a>
 				<a href="${spring:mvcUrl('PC#list').build()}" class="btn btn-success" role="button">Listagem Produto</a>
-				<a href="<c:url value="/logout" />" class="btn btn-danger" role="button">Logout</a>
 			</p>
 	    </div>	
 	

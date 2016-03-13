@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,12 +13,9 @@
 <title>Cadastro de Produtos</title>
 
 <!-- Bootstrap -->
-<link
-	href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/sticky-footer.css"
-	rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/sticky-footer.css" rel="stylesheet">
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,16 +29,50 @@
 <body>
 
 
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Book Shopping</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="${pageContext.servletContext.contextPath}/">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+	            <a href="${pageContext.servletContext.contextPath}/logout">
+					<security:authorize access="isAuthenticated()">
+						<security:authentication property="principal" var="user" />
+						<span class="glyphicon glyphicon-user"></span>
+						<spring:message code="users.welcome" arguments="${user.name}" />
+					</security:authorize>
+					| Logout
+	           	</a>
+           	</li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
 
 	<!-- Begin page content -->
 	<div class="container">
 
 		<div class="page-header">
-			<h1> <span class="glyphicon glyphicon-eur" aria-hidden="true"></span> Erro! acesso não autorizado </h1>
+			<h1> <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Erro! acesso não autorizado </h1>
 		</div>
 		
-		<img src="http://localhost:9444/s3/s3Amazon/403-page.png" class="img-responsive img-thumbnail" alt="Sucesso">
+		<img src="<c:url value="/resources/imagens/403-page.png"/>" class="img-responsive img-thumbnail" alt="Sucesso">
 
+		<br><br>
+		
 		<p>
 			<a href="<c:url value="/produto/listagem"/>" class="btn btn-success" role="button">Listagem Produto </a> 
 		</p>

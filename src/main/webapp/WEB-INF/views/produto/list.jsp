@@ -15,13 +15,12 @@
 			<div class="page-header">
 			  <h1>Lista de Produtos</h1>
 			  
-			  <hr>
-			  <p>
+			  <%-- <p>
 			  	<security:authorize access="isAuthenticated()">
 				  	<security:authentication property="principal" var="user"/> 
-				  	<span class="glyphicon glyphicon-user"></span> <spring:message code="users.welcome" arguments="${user.name}"/> Loggued
+				  	<span class="glyphicon glyphicon-user"></span> <spring:message code="users.welcome" arguments="${user.name}"/>
 			  	</security:authorize>
-			  </p>
+			  </p> --%>
 			  
 				<%--
 				Poderia ser usado tbm dessa form 
@@ -43,7 +42,7 @@
 					
 					<c:forEach items="${produtos}" var="produto">
 						<tr>
-							<td> <img src="http://localhost:9444/s3/s3Amazon/prod-${produto.id}-img.png" class="img-responsive img-rounded" alt="Responsive image"> </td>
+							<td> <img src="<c:url value="/resources/imagens/uploads/prod-${produto.id}-img.png"/>" class="img-responsive img-rounded" alt="Responsive image" style="width: 50%;"> </td>
 							<td> 
 								
 								<a href="${spring:mvcUrl('PC#show').arg(0,produto.id).build()}">
@@ -86,8 +85,8 @@
 			</c:if>
 			
 			<p>
-				<a href="${spring:mvcUrl('PC#form').build()}" class="btn btn-primary" role="button"> <spring:message code="produto.cadastro"/> </a>
-				<a href="${spring:mvcUrl('CC#items').build()}" class="btn btn-info" role="button"> <spring:message code="carrinho.compras"/> </a>
+				<a href="${spring:mvcUrl('PC#form').build()}" class="btn btn-primary" role="button"> Cadastrar Produto </a>
+				<a href="${spring:mvcUrl('CC#items').build()}" class="btn btn-info" role="button"> Carrinho de Compra </a>
 				
 			</p>
 			

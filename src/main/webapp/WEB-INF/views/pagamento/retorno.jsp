@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -30,6 +31,38 @@
 </head>
 <body>
 
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Book Shopping</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="${pageContext.servletContext.contextPath}/">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+	            <a href="${pageContext.servletContext.contextPath}/logout">
+					<security:authorize access="isAuthenticated()">
+						<security:authentication property="principal" var="user" />
+						<span class="glyphicon glyphicon-user"></span>
+						<spring:message code="users.welcome" arguments="${user.name}" />
+					</security:authorize>
+					| Logout
+	           	</a>
+           	</li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
 
 
 	<!-- Begin page content -->
@@ -41,12 +74,15 @@
 		
 		<c:choose>
 			<c:when test="${sucesso}">
-				<img src="http://localhost:9444/s3/s3Amazon/200-payment-sucesso.png" class="img-responsive img-thumbnail" alt="Sucesso">
+				<!-- <img src="http://localhost:9444/s3/s3Amazon/200-payment-sucesso.png" class="img-responsive img-thumbnail" alt="Sucesso"> -->
+				<img src="<c:url value="/resources/imagens/200-payment-sucesso.png"/>" class="img-responsive img-thumbnail" alt="Sucesso">
 			</c:when>
 			<c:otherwise>
-				<img src="http://localhost:9444/s3/s3Amazon/400-bad-request.png" class="img-responsive img-thumbnail" alt="Sucesso">
+				<img src="<c:url value="/resources/imagens/400-bad-request.png"/>" class="img-responsive img-thumbnail" alt="Sucesso">
 			</c:otherwise>
 		</c:choose>
+		
+		<br>
 		
 		<p>
 			<a href="${spring:mvcUrl('PC#form').build()}" class="btn btn-primary" role="button">Cadastrar Produto </a> 

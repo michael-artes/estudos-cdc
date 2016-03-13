@@ -1,32 +1,37 @@
 package br.com.michael.loja.service;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.amazonaws.ClientConfiguration;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.S3ClientOptions;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import br.com.michael.loja.models.Produto;
 
 @Component
 public class SalvarArquivo {
 	
-	private static String bucket = "s3Amazon";
+//	private static String bucket = "s3Amazon";
+	
+	@Autowired
+	private HttpServletRequest request;
+	
+	private String fileName = "prod-%s-img.png";
+	
+	
+	private static final Logger LOGGER = Logger.getLogger(SalvarArquivo.class);
 	
 
-	/*@Autowired
-	private HttpServletRequest request;*/
-
+	
 	public String writer(Produto produto, MultipartFile sumario) {
 		
-		PutObjectRequest putObjectRequest = null;
+		/*PutObjectRequest putObjectRequest = null;
 		
 		try {
 			putObjectRequest = new PutObjectRequest(bucket, "prod-"+produto.getId()+"-img.png", sumario.getInputStream(), new ObjectMetadata());
@@ -37,32 +42,46 @@ public class SalvarArquivo {
 			return "https://s3.amazonaws.com/casadocodigo/"+sumario.getOriginalFilename()+"?noAuth=true";
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 		
 
 		
 		//Salvando no projeto
-		/*String realPath = request.getServletContext().getRealPath("/" + pastaArquivo);
-		String path = realPath + "/" + sumario.getOriginalFilename();*/
+		String realPath = request.getServletContext().getRealPath("/resources/imagens/uploads");
 		
-		/*try {
+		String path = realPath + "/" + String.format(fileName, produto.getId());
+		
+		LOGGER.debug("path do arquivo: " + path);
+		
+		try {
 			
-			System.out.println("O arquivo sera gravado em: " + path);
-			File dest = new File(path);
-			sumario.transferTo(dest);
-			return pastaArquivo + "/" + sumario.getOriginalFilename();
 			
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
+			File dest = new File(realPath);
+			
+			if (!dest.exists()) {
+				boolean mkdirs = dest.mkdirs();
+				
+				LOGGER.info("isCriado diretorio: " + mkdirs);
+			}
+			
+			BufferedOutputStream os = new BufferedOutputStream( new FileOutputStream( new File(path) ) );
+			os.write(sumario.getBytes());
+			os.close();
+			
+			return path;
+			
+		} catch (IllegalStateException | IOException e) {
+			LOGGER.error("Nao foi possivel salvar o arquivo.", e);
+		}
 		
 		
 		return null;
 	}
 
-	private AmazonS3Client client() {
+	
+	
+	
+	/*private AmazonS3Client client() {
 		
 		AWSCredentials credentials = new BasicAWSCredentials("AKIAIOSFODNN7EXAMPLE","wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY");
 		
@@ -71,7 +90,7 @@ public class SalvarArquivo {
 		
 		client.setEndpoint("http://localhost:9444/s3");
 		return client; 
-	}
+	}*/
 	
 	
 	

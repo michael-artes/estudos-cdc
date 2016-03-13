@@ -1,5 +1,7 @@
 package br.com.michael.loja.conf;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
@@ -41,8 +43,8 @@ public class JPAConfiguration {
 		Properties properties = new Properties();
 		properties.put("hibernate.hbm2ddl.auto", "update");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.format_sql", "true");
+		properties.put("hibernate.show_sql", "false");
+		properties.put("hibernate.format_sql", "false");
 		
 		return properties;
 	}
@@ -50,7 +52,7 @@ public class JPAConfiguration {
 	
 	@Bean
 	@Profile("production")
-	public DataSource getDataSource(Environment environment) {
+	public DataSource getDataSourceProd(Environment environment) {
 		DriverManagerDataSource driver = new DriverManagerDataSource();
 		driver.setDriverClassName("org.postgresql.Driver");
 		driver.setUrl("jdbc:postgresql://localhost:5432/spring-mvn-cdc");
@@ -58,6 +60,18 @@ public class JPAConfiguration {
 		driver.setPassword("08101993md");
 		return driver;
 	}
+	
+	
+	@Bean
+	@Profile("prod-heroku")
+	public DataSource getDataSourceHeroku(Environment environment) throws URISyntaxException {
+		DriverManagerDataSource driver = new DriverManagerDataSource();
+		URI dbUrl =	new URI(environment.getProperty("DATABASE_URL"));
+		driver.setUrl("jdbc:postgresql://"+ dbUrl.getHost() + ":" + dbUrl.getPort() + dbUrl.getPath());
+		driver.setUsername(dbUrl.getUserInfo().split(":")[0]);
+		driver.setPassword(dbUrl.getUserInfo().split(":")[1]);
+		return driver;
+	}	
 	
 	
 	@Bean

@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.and()
 		.formLogin().loginPage("/login").permitAll()
 		.usernameParameter("loginUser").passwordParameter("senhaUser")
-		.defaultSuccessUrl("/produto/listagem")
+		.successHandler(new SuccessHandlerLogin())
 		.and()
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
