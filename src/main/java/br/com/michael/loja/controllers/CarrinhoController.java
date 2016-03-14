@@ -75,7 +75,7 @@ public class CarrinhoController {
 	@RequestMapping(method=RequestMethod.POST, value="atualizar")
 	public ModelAndView atualizar(Integer idProduto, Integer qtdProdutoId){
 		
-		ModelAndView view = new ModelAndView("/carrinho/carrinho");
+		ModelAndView view = new ModelAndView("carrinho/carrinho");
 		
 		if (qtdProdutoId < 0) {
 			view.addObject("invalidQuantidade", "A quantidade não pode ser menor que zero");
