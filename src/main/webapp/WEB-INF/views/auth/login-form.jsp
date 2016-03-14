@@ -85,37 +85,6 @@ body {
 
 	<div class="container">
 	
-		<c:if test="${param.error != null}">
-		  <div class="alert alert-danger">
-		      <p>Invalid username and password.</p>
-		  </div>
-		</c:if>	
-		
-		<c:if test="${userCreate}">
-		  <div class="alert alert-warning">
-		  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		      	<strong>Info!</strong>
-		      	<p>Usuario criado com sucesso!</p>
-		  </div>
-		</c:if>		
-		
-		<c:if test="${userAtivado}">
-		  <div class="alert alert-success">
-		  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		      	<strong>Info!</strong>
-		      	<p>Usuario ativado com sucesso!</p>
-		  </div>
-		</c:if>				
-		
-      	<spring:hasBindErrors name="user">
-			<c:forEach items="${errors.allErrors}" var="error">
-					<div class="alert alert-danger">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Error!</strong>
-					  	<p><spring:message text="${error.defaultMessage}"/> </p>
-					</div>			
-			</c:forEach>      
-      	</spring:hasBindErrors>		
 		
 
 		<form class="form-signin" action="<c:url value="/login"/>" method="post">
@@ -159,8 +128,9 @@ body {
 		        <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-user"></span> Cadastrar usuário </h4>
 		      </div>
 		      
-		      
-		    <form action="<c:url value="/user/create"/>" method="post">
+			<form:form method="post" servletRelativeAction="/user/create">
+			
+			  <security:csrfInput/>
 			
 		      <div class="modal-body">
 	
@@ -199,7 +169,7 @@ body {
 		        <button type="submit" class="btn btn-primary">Salvar</button>
 		      </div>
 		      
-			</form>
+			</form:form>
 		    </div>
 		  </div>
 		</div>		
