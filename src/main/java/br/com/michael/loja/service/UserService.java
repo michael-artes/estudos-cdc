@@ -2,6 +2,7 @@ package br.com.michael.loja.service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class UserService {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	
+	@Autowired
+	private HttpServletRequest request;
 	
 	
 	private BCryptPasswordEncoder cript = new BCryptPasswordEncoder();
@@ -51,6 +56,18 @@ public class UserService {
 	}
 
 	private StringBuilder builderCorpoEmail(User user, String senha) {
+		
+		
+		String url = request.getRequestURL().toString();
+		String uri = request.getRequestURI();
+		
+		LOGGER.info("URL-COMPLET: " + url);
+		LOGGER.info("URI: " + url);
+		
+		String compleUri = url.replace(uri, "") + request.getContextPath();
+		
+		LOGGER.info("URL-TO-EMAIL: " + url);
+		
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("<!DOCTYPE html>");
@@ -66,7 +83,7 @@ public class UserService {
 		sb.append("		<br>");
 		sb.append("		Acesse o link para ativar o seu usuário:");
 		sb.append("		<hr> <br>");
-		sb.append("		http://secure-dawn-26554.herokuapp.com/user/active?email=" + user.getLogin());
+		sb.append("		"+ compleUri +"/user/active?email=" + user.getLogin());
 		sb.append("		<br>");
 		sb.append("		Sua senha é: " + senha);
 		sb.append("		<br>");
@@ -75,6 +92,8 @@ public class UserService {
 		
 		sb.append("</body>");
 		sb.append("</html>");
+		
+		
 		return sb;
 	}
 	
