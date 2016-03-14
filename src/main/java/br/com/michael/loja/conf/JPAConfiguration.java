@@ -56,8 +56,8 @@ public class JPAConfiguration {
 		DriverManagerDataSource driver = new DriverManagerDataSource();
 		driver.setDriverClassName("org.postgresql.Driver");
 		driver.setUrl("jdbc:postgresql://localhost:5432/spring-mvn-cdc");
-		driver.setUsername("postgres");
-		driver.setPassword("08101993md");
+		driver.setUsername("seu usuario");
+		driver.setPassword("sua senha");
 		return driver;
 	}
 	
