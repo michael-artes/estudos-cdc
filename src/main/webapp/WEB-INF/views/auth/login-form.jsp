@@ -87,7 +87,9 @@ body {
 	
 		<c:if test="${param.error != null}">
 		  <div class="alert alert-danger">
-		      <p>Invalid username and password.</p>
+		  	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  	  <strong>Erro!</strong>
+		      <p>Usuário ou senha não encontrados em nossa base de dados!</p>
 		  </div>
 		</c:if>	
 		
