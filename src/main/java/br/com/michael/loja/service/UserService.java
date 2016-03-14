@@ -66,7 +66,7 @@ public class UserService {
 		sb.append("		<br>");
 		sb.append("		Acesse o link para ativar o seu usuário:");
 		sb.append("		<hr> <br>");
-		sb.append("		http://localhost:8080/spring-mvc-cdc/user/active?email=" + user.getLogin());
+		sb.append("		http://secure-dawn-26554.herokuapp.com/user/active?email=" + user.getLogin());
 		sb.append("		<br>");
 		sb.append("		Sua senha é: " + senha);
 		sb.append("		<br>");
