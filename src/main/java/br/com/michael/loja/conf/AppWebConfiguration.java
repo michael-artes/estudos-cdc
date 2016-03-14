@@ -19,7 +19,6 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.client.RestTemplate;
@@ -102,7 +101,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 		
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(true);
 		DateFormatterRegistrar registrar = new DateFormatterRegistrar();
-		registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
+		registrar.setFormatter(new DateFormatter("MM/dd/yyyy"));
 		registrar.registerFormatters(conversionService);
 		
 		return conversionService;
@@ -141,12 +140,12 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 	
 	
 	@Bean
-	public MailSender mailSender() {
+	public JavaMailSenderImpl mailSender() {
 		
 		JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
 		javaMailSenderImpl.setHost("smtp.gmail.com");
-		javaMailSenderImpl.setUsername("user");
-		javaMailSenderImpl.setPassword("senha de aplicativo");
+		javaMailSenderImpl.setUsername("mmoreira.dg@gmail.com");
+		javaMailSenderImpl.setPassword("uikmpqmfguwjxcsa");
 		javaMailSenderImpl.setPort(587);
 		
 		Properties mailProperties = new Properties();
@@ -160,5 +159,6 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 		
 		return javaMailSenderImpl;
 	}
+	
 	
 }

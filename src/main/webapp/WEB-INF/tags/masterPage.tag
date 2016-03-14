@@ -16,8 +16,9 @@
     <title>${title}</title>
 
     <!-- Bootstrap -->
-    <link href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/sticky-footer.css" rel="stylesheet">
+    <link href="<spring:url value="/resources/bootstrap-3.3.6-dist/css/bootstrap.min.css"/>" rel="stylesheet">
+	<link href="<spring:url value="/resources/bootstrap-3.3.6-dist/sticky-footer.css"/>" rel="stylesheet">
+	<link href="<spring:url value="/resources/datapicker/css/datepicker.css"/>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,14 +84,26 @@
 	
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Copyrigth © 2015 - Spring MVC</p>
+        <p class="text-muted">Copyrigth © 2016 - Spring MVC</p>
       </div>
     </footer>    
     
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="${pageContext.servletContext.contextPath}/resources/jquery/jquery-1.12.0.min.js"></script>
+    <script src="<spring:url value="/resources/jquery/jquery-1.12.0.min.js"/>"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="<spring:url value="/resources/bootstrap-3.3.6-dist/js/bootstrap.min.js"/>"></script>
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<spring:url value="/resources/datapicker/js/bootstrap-datepicker.js"/>"></script>
+    
+    
+    <script type="text/javascript">
+    
+	    $(function(){
+	    	$(".datapicker").datepicker();
+	    });    
+    
+    </script>
+    
   </body>
 </html>

@@ -2,9 +2,10 @@ package br.com.michael.loja.models;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,17 +30,19 @@ public class Produto {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="prod_seq")
 	private Integer id;
 	
-	@NotBlank
+	@NotBlank(message="O campo titulo é obrigatório")
 	private String titulo;
 	
-	@NotBlank
+	@NotBlank(message="O campo descrição é obrigatório")
 	private String descricao;
 	
-	@Min(30)
-	private Integer paginas;
+	@Min(value=30, message="Campo paginas quantidade minima 30")
+	private int paginas;
 	
-	@DateTimeFormat(pattern="MM-dd-yyyy")
-	private Calendar lancementoData;
+	@Column(name="lancamento_data")
+	@DateTimeFormat(pattern="MM/dd/yyyy")
+	private Date lancamentoData;
+	
 	
 	@ElementCollection(fetch=FetchType.LAZY)
 	private List<Preco> precos = new ArrayList<Preco>();
@@ -80,12 +83,6 @@ public class Produto {
 		this.precos = precos;
 	}
 	
-	public Calendar getLancementoData() {
-		return lancementoData;
-	}
-	public void setLancementoData(Calendar lancementoData) {
-		this.lancementoData = lancementoData;
-	}
 	
 	public String getSumarioPath() {
 		return sumarioPath;
@@ -107,4 +104,13 @@ public class Produto {
 				.filter(preco -> preco.getLivroTipo().equals(livroTipo))
 				.findFirst().get().getValor();
 	}
+	
+	public Date getLancamentoData() {
+		return lancamentoData;
+	}
+	public void setLancamentoData(Date lancamentoData) {
+		this.lancamentoData = lancamentoData;
+	}
+	
+	
 }

@@ -1,7 +1,7 @@
 package br.com.michael.loja.daos.test;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -47,7 +47,7 @@ public class ProdutoDAOTest {
 		Produto produto = new Produto();
 		
 		produto.setDescricao("teste");
-		produto.setLancementoData(Calendar.getInstance());
+		produto.setLancamentoData(new Date());
 		produto.setPaginas(3215);
 		produto.setTitulo("titulo livro");
 		

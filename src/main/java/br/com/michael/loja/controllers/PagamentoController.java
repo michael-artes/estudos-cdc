@@ -2,8 +2,6 @@ package br.com.michael.loja.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.mail.MailSender;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +11,6 @@ import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.michael.loja.models.Carrinho;
-import br.com.michael.loja.models.User;
 import br.com.michael.loja.service.IntegrandoComPagamento;
 
 @Controller
@@ -21,15 +18,12 @@ import br.com.michael.loja.service.IntegrandoComPagamento;
 @Scope(value=WebApplicationContext.SCOPE_REQUEST)
 public class PagamentoController {
 	
+	
 	@Autowired
 	private Carrinho carrinho;
 	
 	@Autowired
 	private RestTemplate restTemplate;
-	
-	
-	@Autowired
-	private MailSender mailSender;
 	
 	
 	/**
@@ -116,15 +110,12 @@ public class PagamentoController {
 	 * retorn DeferredResult -> maior controle das threads
 	 * 
 	 * */
-	
 	@RequestMapping(method=RequestMethod.POST, value="finalizar-compra")
-	public DeferredResult<ModelAndView> finalizarCompra(Authentication principal){
+	public DeferredResult<ModelAndView> finalizarCompra(){
 		
 		DeferredResult<ModelAndView> result = new DeferredResult<ModelAndView>();
 		
-		User user = (User) principal.getPrincipal();
-		
-		IntegrandoComPagamento integracao = new IntegrandoComPagamento(result, carrinho.getTotal(), restTemplate, mailSender, ((User) user));
+		IntegrandoComPagamento integracao = new IntegrandoComPagamento(result, carrinho.getTotal(), restTemplate);
 		
 		Thread thread = new Thread(integracao);
 		thread.start();

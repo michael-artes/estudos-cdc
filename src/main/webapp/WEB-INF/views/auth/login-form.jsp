@@ -10,15 +10,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Cadastro de Produtos</title>
+<title>Login</title>
 
-<!-- Bootstrap -->
-<link
-	href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/sticky-footer.css"
-	rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="<spring:url value="/resources/bootstrap-3.3.6-dist/css/bootstrap.min.css"/>" rel="stylesheet">
+	<link href="<spring:url value="/resources/bootstrap-3.3.6-dist/sticky-footer.css"/>" rel="stylesheet">
+	<link href="<spring:url value="/resources/datapicker/css/datepicker.css"/>" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -75,6 +72,10 @@ body {
 	border-top-right-radius: 0;
 }
 
+.datepicker {
+	z-index: 1060;
+}
+
 </style>
 
 </head>
@@ -90,14 +91,39 @@ body {
 		  </div>
 		</c:if>	
 		
+		<c:if test="${userCreate}">
+		  <div class="alert alert-warning">
+		  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      	<strong>Info!</strong>
+		      	<p>Usuario criado com sucesso!</p>
+		  </div>
+		</c:if>		
+		
+		<c:if test="${userAtivado}">
+		  <div class="alert alert-success">
+		  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      	<strong>Info!</strong>
+		      	<p>Usuario ativado com sucesso!</p>
+		  </div>
+		</c:if>				
+		
+      	<spring:hasBindErrors name="user">
+			<c:forEach items="${errors.allErrors}" var="error">
+					<div class="alert alert-danger">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Error!</strong>
+					  	<p><spring:message text="${error.defaultMessage}"/> </p>
+					</div>			
+			</c:forEach>      
+      	</spring:hasBindErrors>		
+		
 
-		<form class="form-signin" action="<c:url value="/login"/>"
-			method="post">
+		<form class="form-signin" action="<c:url value="/login"/>" method="post">
 
 			<security:csrfInput />
 
 			<h2 class="form-signin-heading">
-				<span class="glyphicon glyphicon-level-up"></span> Favor logar-se
+				<span class="glyphicon glyphicon-eye-open"></span> Acessar Conta!
 			</h2>
 
 			<label for="login" class="sr-only">Email:</label> 
@@ -112,9 +138,72 @@ body {
 				</label>
 			</div>
 
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
-
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-user"></span> Logar
+			</button>
+			
+			<hr> <br>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#cadUser">
+			  <span class="glyphicon glyphicon-plus-sign"></span> Cadastrar usuário
+			</button>
 		</form>
+		
+		
+		<!-- Modal -->
+		<div class="modal fade" id="cadUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-user"></span> Cadastrar usuário </h4>
+		      </div>
+		      
+			<form:form method="post" servletRelativeAction="/user/create">
+			
+			  <security:csrfInput/>
+			
+		      <div class="modal-body">
+	
+			  <div class="form-group">
+			    <label for="name">Nome</label>
+			    <input type="text" name="name" class="form-control" placeholder="Nome..." required="required">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="login">Email</label>
+			    <input type="email" name="login" class="form-control" placeholder="email..." required="required">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="password">Senha</label>
+			    <input type="password" name="password" class="form-control" placeholder="senha..." required="required">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="dataCad">Data Cadastro</label>
+			    <input type="text" name="dataCad" class="form-control datapicker" placeholder="Data..." required="required">
+			  </div>	
+			  
+			  <div class="form-group">
+			    <label for="enumRoles">Tipo Usuario</label>
+				<select class="form-control" name="enumRoles" required="required">
+				  <option value="-1"> ---- Selecione ---- </option>
+				  <option value="ROLE_COMPRADOR">COMPRADOR</option>
+				</select>			    
+			  </div>			  		  				  				  	
+			  
+		      </div>
+		      
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+		        <button type="submit" class="btn btn-primary">Salvar</button>
+		      </div>
+		      
+			</form:form>
+		    </div>
+		  </div>
+		</div>		
 
 
 	</div>
@@ -122,16 +211,28 @@ body {
 
 	<footer class="footer">
 		<div class="container">
-			<p class="text-muted">Copyrigth © 2015 - Spring MVC.</p>
+			<p class="text-muted">Copyrigth © 2016 - Spring MVC.</p>
 		</div>
 	</footer>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-		src="${pageContext.servletContext.contextPath}/resources/jquery/jquery-1.12.0.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script
-		src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="<spring:url value="/resources/jquery/jquery-1.12.0.min.js"/>"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<spring:url value="/resources/bootstrap-3.3.6-dist/js/bootstrap.min.js"/>"></script>
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<spring:url value="/resources/datapicker/js/bootstrap-datepicker.js"/>"></script>
+    
+    
+    <script type="text/javascript">
+    
+	    $(function(){
+	    	$(".datapicker").datepicker();
+	    });    
+    
+    </script>
+    
+        
 </body>
 </html>

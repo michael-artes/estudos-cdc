@@ -54,7 +54,7 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		super.onStartup(servletContext);
 		
 		servletContext.addListener(RequestContextListener.class);
-		servletContext.setInitParameter(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, "prod-heroku");
+		servletContext.setInitParameter(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, "production");
 		
 	}
 

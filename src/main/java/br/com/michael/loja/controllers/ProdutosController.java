@@ -132,7 +132,7 @@ public class ProdutosController {
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
 	public ModelAndView show(@PathVariable("id") Integer id){
 		
-		ModelAndView view = new ModelAndView("/produto/show");
+		ModelAndView view = new ModelAndView("produto/show");
 		
 		Produto produto = produtoDAO.findById(id);
 		view.addObject("produto", produto);
