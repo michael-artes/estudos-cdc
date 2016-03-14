@@ -159,7 +159,8 @@ body {
 		        <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-user"></span> Cadastrar usuário </h4>
 		      </div>
 		      
-			<form:form method="post" servletRelativeAction="/user/create">
+		      
+		    <form action="<c:url value="/user/create"/>" method="post">
 			
 			  <security:csrfInput/>
 			
@@ -200,7 +201,7 @@ body {
 		        <button type="submit" class="btn btn-primary">Salvar</button>
 		      </div>
 		      
-			</form:form>
+			</form>
 		    </div>
 		  </div>
 		</div>		
