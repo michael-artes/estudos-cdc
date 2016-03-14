@@ -85,6 +85,28 @@ body {
 
 	<div class="container">
 	
+		<c:if test="${param.error != null}">
+		  <div class="alert alert-danger">
+		      <p>Invalid username and password.</p>
+		  </div>
+		</c:if>	
+		
+		<c:if test="${userCreate == true}">
+		  <div class="alert alert-warning">
+		  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      	<strong>Info!</strong>
+		      	<p>Usuario criado com sucesso!</p>
+		  </div>
+		</c:if>		
+		
+		<c:if test="${userAtivado == true}">
+		  <div class="alert alert-success">
+		  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      	<strong>Info!</strong>
+		      	<p>Usuario ativado com sucesso!</p>
+		  </div>
+		</c:if>				
+		
       	<spring:hasBindErrors name="user">
 			<c:forEach items="${errors.allErrors}" var="error">
 					<div class="alert alert-danger">
