@@ -162,8 +162,6 @@ body {
 		      
 		    <form action="<c:url value="/user/create"/>" method="post">
 			
-			  <security:csrfInput/>
-			
 		      <div class="modal-body">
 	
 			  <div class="form-group">
