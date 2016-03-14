@@ -85,6 +85,15 @@ body {
 
 	<div class="container">
 	
+      	<spring:hasBindErrors name="user">
+			<c:forEach items="${errors.allErrors}" var="error">
+					<div class="alert alert-danger">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Error!</strong>
+					  	<p><spring:message text="${error.defaultMessage}"/> </p>
+					</div>			
+			</c:forEach>      
+      	</spring:hasBindErrors>		
 		
 
 		<form class="form-signin" action="<c:url value="/login"/>" method="post">
