@@ -39,7 +39,7 @@ public class UserService {
 			userDAO.salvarUsuario(user);
 			userDAO.salvarUserRole(user);
 		} catch (Exception e) {
-			LOGGER.error("Não foi possível salvar o usuário.", e);
+			LOGGER.error("Não foi possível salvar o usuário teste.", e);
 			return;
 		}
 		
