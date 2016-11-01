@@ -3,12 +3,12 @@ package br.com.loginapp.view;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.login.app.controller.CarrinhoController;
 import com.login.app.controller.VitrineController;
 import com.login.app.model.Produto;
 
+import br.com.loginapp.converter.ItensProperty;
 import javafx.application.Application;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -30,7 +30,7 @@ public class VitrineApp extends Application{
 	
 	private static ObservableList<ItensProperty> listItens = FXCollections.observableArrayList();
 	
-//	private static CarrinhoController carrinhoController;
+	private static CarrinhoController carrinhoController;
 	
 	private static Stage stage;
 	
@@ -86,7 +86,7 @@ public class VitrineApp extends Application{
 		tbVitrine.setItems(listItens);
 	}
 	
-	private <T> void initListeners() {
+	private void initListeners() {
 
 		txPesquisa.setOnAction((event) -> {
 			
@@ -102,7 +102,6 @@ public class VitrineApp extends Application{
 			}
 			
 		});
-		
 		
 		
 		tbVitrine.getSelectionModel().selectedItemProperty()
@@ -150,6 +149,8 @@ public class VitrineApp extends Application{
 		
 		cena = new Scene(painel);
 		
+		carrinhoController = new CarrinhoController();
+		
 		txPesquisa = new TextField();
 		txPesquisa.setPromptText("Pesquisar...");
 		
@@ -163,7 +164,7 @@ public class VitrineApp extends Application{
 		
 		colunaPreco = new TableColumn<ItensProperty, Double>();
 		colunaPreco.setCellValueFactory(new PropertyValueFactory<ItensProperty, Double>("preco"));
-		colunaPreco.setText("PreÃ§o");
+		colunaPreco.setText("Preço");
 		
 		tbVitrine.getColumns().addAll(colunaProduto,colunaPreco);
 		
@@ -171,44 +172,8 @@ public class VitrineApp extends Application{
 	}
 	
 
-	public class ItensProperty{
-		
-		private SimpleStringProperty produto;
-		private SimpleDoubleProperty preco;
-		private SimpleStringProperty pathImg;
-		
-		public ItensProperty(String produto, double preco, String pathImg) {
-			this.produto = new SimpleStringProperty(produto);
-			this.preco = new SimpleDoubleProperty(preco);
-			this.pathImg = new SimpleStringProperty(pathImg);
-		}
-
-		
-		public String getProduto() {
-			return produto.get();
-		}
-
-		public void setProduto(String produto) {
-			this.produto.set(produto);
-		}
-
-		public double getPreco() {
-			return preco.get();
-		}
-
-		public void setPreco(double preco) {
-			this.preco.set(preco);
-		}
-
-
-		public String getPathImg() {
-			return this.pathImg.get();
-		}
-
-		public void setPathImg(String pathImg) {
-			this.pathImg.set(pathImg);
-		}
-		
+	public static CarrinhoController getCarrinhoController() {
+		return carrinhoController;
 	}
 	
 }

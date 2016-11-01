@@ -1,5 +1,6 @@
 package br.com.loginapp.view;
 
+import com.login.app.controller.CarrinhoController;
 import com.login.app.model.Produto;
 
 import javafx.application.Application;
@@ -57,7 +58,21 @@ public class ItemApp extends Application{
 	}
 
 	private void initListeners() {
-		// TODO Auto-generated method stub
+
+	
+		btCarrinho.setOnAction((event) -> {
+			
+			CarrinhoController.getProdutos().add(getProduto());
+			
+			try {
+				new CarrinhoApp().start(new Stage());
+				ItemApp.stage.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		});
+	
 	}
 
 	private void initComponentes() {

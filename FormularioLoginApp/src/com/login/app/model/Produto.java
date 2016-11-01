@@ -1,6 +1,6 @@
 package com.login.app.model;
 
-public class Produto {
+public class Produto implements Comparable<Produto>{
 	
 	private String produto;
 	private double preco;
@@ -40,6 +40,12 @@ public class Produto {
 
 	public void setPathImg(String pathImg) {
 		this.pathImg = pathImg;
+	}
+
+
+	@Override
+	public int compareTo(Produto o) {
+		return this.getProduto().compareTo(o.getProduto());
 	}
 	
 	

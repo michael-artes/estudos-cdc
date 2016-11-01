@@ -13,10 +13,8 @@ public class CarrinhoController {
 		return produtos;
 	}
 	
-	
 	public void addProdutos(List<Produto> listProdutos){
 		listProdutos.forEach(produtos::add);
 	}
-	
 	
 }

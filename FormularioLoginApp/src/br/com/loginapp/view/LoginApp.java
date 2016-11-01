@@ -55,7 +55,7 @@ public class LoginApp extends Application{
 		txSenha = new PasswordField();
 		txSenha.setPromptText("Digite a senha");
 		
-		txErros = new Text("É um test");
+		txErros = new Text("Apenar um teste");
 		
 		btEntrar = new Button("Entrar");
 		btSair = new Button("Sair");	
