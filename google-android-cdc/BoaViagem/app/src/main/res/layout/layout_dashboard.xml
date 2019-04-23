@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
+
+
+        <TextView
+            android:id="@+id/novo_gasto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="80dp"
+            android:clickable="true"
+            android:drawableTop="@drawable/novo_gasto"
+            android:onClick="selecionarOpcao"
+            android:text="@string/dash_novo_gasto"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/nova_viagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/novo_gasto"
+            android:layout_marginRight="50dp"
+            android:clickable="true"
+            android:drawableTop="@drawable/nova_viagem"
+            android:onClick="selecionarOpcao"
+            android:text="@string/dash_nova_viagem"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/minhas_viagens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/novo_gasto"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="120dp"
+            android:clickable="true"
+            android:drawableTop="@drawable/minhas_viagens"
+            android:onClick="selecionarOpcao"
+            android:text="@string/dash_minhas_viagens"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/configuracoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/minhas_viagens"
+            android:layout_alignRight="@id/nova_viagem"
+            android:clickable="true"
+            android:drawableTop="@drawable/configuracoes"
+            android:onClick="selecionarOpcao"
+            android:text="@string/dash_config"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>

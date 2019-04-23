@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">BoaViagem</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="login_user">Usuario</string>
+    <string name="login_senha">Senha</string>
+    <string name="login_entrar">Entrar</string>
+
+    <string name="erro_autenticao">Usuário informado está incorreto!</string>
+
+    <string name="dash_novo_gasto">Novo Gasto</string>
+    <string name="dash_nova_viagem">Nova Viagem</string>
+    <string name="dash_minhas_viagens">Minhas Viagens</string>
+    <string name="dash_config">Configurações</string>
+    <string name="destino">Destino</string>
+    <string name="tipo_da_viagem">Tipo da Viagem</string>
+    <string name="lazer">Lazer</string>
+    <string name="negocios">Negócios</string>
+    <string name="data_da_chegada">Data de Chegada</string>
+    <string name="data_da_saida">Data de Saída</string>
+    <string name="selecione">Selecione</string>
+    <string name="orcamento">Orçamento</string>
+    <string name="quantidade_de_pessoas">Quantidade de Pessoas</string>
+    <string name="salvar">Salvar</string>
+    <string name="valor">Valor</string>
+    <string name="data">Data</string>
+    <string name="local">Local</string>
+    <string name="gastei">Gastei</string>
+    <string name="descricao">Descrição</string>
+    <string name="categoria">Categoria</string>
+    
+    
+    
+    
+    <string-array name="categoria_gasto">
+        <item>Alimentação</item>
+        <item>Combustível</item>
+        <item>Transporte</item>
+        <item>Hospedagem</item>
+        <item>Outros</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView android:text="@string/informe_valor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    />
+
+    <EditText android:id="@+id/nomeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName">
+
+        <requestFocus/>
+    </EditText>
+
+
+    <Button android:id="@+id/buttomInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/surpreenda_me"
+        android:onClick="clickButtom" />
+
+</LinearLayout><!-- From: file:/home/mmoreira/AndroidStudioProjects/HelloWordAvanced/app/src/main/res/layout/activity_main.xml -->
