@@ -1,6 +1,6 @@
-# Estudos Livros Casa do Código
+# estudos-cdc
 
-Repositório destinado somente para estudos realizados através dos ebooks da casa do código.
+Estudos JavaFx
 
 [java-8-cdc](https://github.com/michael-artes/estudos-cdc/tree/java-8-cdc)<br>
 [design-pattern-cdc](https://github.com/michael-artes/estudos-cdc/tree/design-pattern-cdc)<br>
