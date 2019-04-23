@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>br.com.design.pattern</groupId>
+  <artifactId>livro-design-pattern</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>Livro Design de Pattern</name>
+  
+  <dependencies>
+  
+  	<!-- Depencendia para testes unitarios -->
+	<dependency>
+	  <groupId>junit</groupId>
+	  <artifactId>junit</artifactId>
+	  <version>4.12</version>
+	</dependency> 
+	
+	<!-- Dependencia para mock de objetos --> 	
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-all</artifactId>
+		<version>1.10.19</version>
+	</dependency>
+	
+  </dependencies>
+  
+  <build>
+  	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.2</version>
+			<configuration>
+				<compilerArguments>
+					<encoding>ISO-8859-1</encoding>
+				</compilerArguments>
+				<source>1.7</source>
+				<target>1.7</target>
+				<compilerVersion>1.7</compilerVersion>
+			</configuration>
+		</plugin>  	
+  	</plugins>
+  </build>
+  
+  
+    
+</project>
