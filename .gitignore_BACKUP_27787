@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -17,8 +19,15 @@ hs_err_pid*
 
 target/
 
+=======
+=======
+>>>>>>> java-8-cdc
 *.classpath
 *.project
 *.settings/
 */target/*
 /target/
+<<<<<<< HEAD
+>>>>>>> 82400738e4775352e0e7d764c1faa2bce12235dc
+=======
+>>>>>>> java-8-cdc
